@@ -34,20 +34,17 @@ def main():
     
     file = os.path.join(os.getcwd(), 'temp/qr_code.png')
     
-    # Loop with a 15-second timeout to prevent infinite hanging
     qr_code_found = False
     attempts = 0
     while not qr_code_found and attempts < 15:
         time.sleep(1)
         attempts += 1
         
-        # METHOD 1: Direct Element Screenshot (Fixes the issue where Discord uses an SVG/Canvas instead of Base64)
+        
         try:
-            # Targets the exact graphic element (SVG, Canvas, or Image) inside the QR wrapper
             graphic_element = driver.find_element('xpath', "//*[contains(@class, 'qrCode')]//*[name()='svg' or name()='canvas' or name()='img']")
             graphic_element.screenshot(file)
             
-            # Verify the picture actually saved correctly
             if os.path.exists(file) and os.path.getsize(file) > 0:
                 qr_code_found = True
                 break
@@ -75,7 +72,7 @@ def main():
             except Exception:
                 pass
 
-    # If 15 seconds pass and no QR code is found, stop the script cleanly
+
     if not qr_code_found:
         print("ERROR: Could not find the QR Code after 15 seconds.")
         print("Look at the Chrome window! Discord might be blocking the browser with a Captcha, or the layout changed.")
@@ -94,7 +91,6 @@ def main():
         if discord_login != driver.current_url:
             print('Grabbing token..')
             
-            # FIX: Added type & length checks to bypass localization dictionaries and grab the true token
             token = driver.execute_script('''
                 window.dispatchEvent(new Event('beforeunload'));
                 let token = null;
